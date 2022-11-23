@@ -1,6 +1,8 @@
 import { Formik, ErrorMessage } from 'formik';
 import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
+import { addContact } from 'redux/contactsSlice';
+import { getContacts } from 'redux/selectors';
 import * as yup from 'yup';
 import { FormWrap, FieldWrap } from './ContactForm.styled';
 
@@ -9,12 +11,19 @@ let schema = yup.object().shape({
   number: yup.number().required(),
 });
 
-export const ContactForm = ({ onSubmit }) => {
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
   const nameInputId = nanoid();
   const numberInputId = nanoid();
 
   const handleFormSubmit = (values, { resetForm }) => {
-    onSubmit(values);
+    const { name, number } = values;
+    if (contacts.some(contact => contact.name === name)) {
+      return alert(`${name} is already in contacts.`);
+    }
+    console.log(values);
+    dispatch(addContact(name, number));
     resetForm();
   };
 
@@ -58,10 +67,6 @@ export const ContactForm = ({ onSubmit }) => {
       </FormWrap>
     </Formik>
   );
-};
-
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
 };
 
 // ======================= ванільний інпут ============================
