@@ -4,7 +4,7 @@ import { deleteContact } from 'redux/contactsSlice';
 import { Button, ItemWrap } from './ContactItem.styled';
 
 export const ContactItem = ({ contact }) => {
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
   const handleDelete = () => dispatch(deleteContact(contact.id));
   return (
     <ItemWrap>
