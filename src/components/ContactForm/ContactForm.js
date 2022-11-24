@@ -22,7 +22,7 @@ export const ContactForm = () => {
     if (contacts.some(contact => contact.name === name)) {
       return alert(`${name} is already in contacts.`);
     }
-    console.log(values);
+
     dispatch(addContact(name, number));
     resetForm();
   };

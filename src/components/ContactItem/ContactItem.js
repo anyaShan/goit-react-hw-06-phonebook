@@ -2,13 +2,13 @@ import PropTypes from 'prop-types';
 
 import { Button, ItemWrap } from './ContactItem.styled';
 
-export const ContactItem = ({ name, number, deleteContact }) => {
+export const ContactItem = ({ id, name, number, deleteContact }) => {
   return (
     <ItemWrap>
       <p>
         {name}: {number}
       </p>
-      <Button type="button" onClick={deleteContact}>
+      <Button type="button" onClick={() => deleteContact(id)}>
         Delete
       </Button>
     </ItemWrap>
