@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { getValueFilter } from 'redux/selectors';
+import { selectValueFilter } from 'redux/selectors';
 import { changeFilter } from 'redux/filterSlice';
 
 import { FilterWrapper } from './Filter.styled';
 
 export const Filter = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(getValueFilter);
+  const filter = useSelector(selectValueFilter);
 
   const handleFilterChange = e => {
     const filterValue = e.target.value.toLowerCase();
